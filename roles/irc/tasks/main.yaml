@@ -5,3 +5,24 @@
     name: unrealircd
     state: present
   
+- name: backup original IRC config file
+  copy:
+    src: /etc/unrealircd/unrealircd.conf
+    dest: /etc/unrealircd/unrealircd.conf.dist
+    mode: preserve
+    force: no
+    remote_src: yes
+
+- name: copy IRC config file
+  template:
+    src: unrealircd.conf
+    dest: /etc/unrealircd/unrealircd.conf
+    owner: ircd
+    group: ircd
+    mode: u=rw,go=r
+
+- name: enable and start IRC server
+  systemd:
+    name: unrealircd
+    enabled: yes
+    state: started
