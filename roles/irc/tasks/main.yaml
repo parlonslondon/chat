@@ -20,6 +20,8 @@
     owner: ircd
     group: ircd
     mode: u=rw,go=r
+  notify:
+    - reload irc
 
 - name: enable and start IRC server
   systemd:

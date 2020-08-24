@@ -14,3 +14,19 @@
     name: thelounge
   become: yes
   become_user: aur_builder
+
+- name: copy thelounge config file
+  template:
+    src: config.js
+    dest: /etc/thelounge/config.js
+    owner: thelounge
+    group: thelounge
+    mode: 0644
+  notify:
+    - restart thelounge
+
+- name: enable and start thelounge
+  systemd:
+    name: thelounge
+    enabled: yes
+    state: started

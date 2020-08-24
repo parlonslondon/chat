@@ -6,6 +6,7 @@
   hosts: all
   gather_facts: yes
   roles:
+    - web
     - irc
     - thelounge
   handlers:
@@ -15,3 +16,11 @@
       systemd:
         name: nginx
         state: reloaded
+    - name: reload irc
+      systemd:
+        name: unrealircd
+        state: reloaded
+    - name: restart thelounge
+      systemd:
+        name: thelounge
+        state: restarted

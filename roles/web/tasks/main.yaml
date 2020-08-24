@@ -1,0 +1,24 @@
+---
+
+- name: install web server and letsencrypt client
+  pacman:
+    name:
+      - nginx
+      - certbot-nginx
+    state: present
+
+- name: copy web server config file
+  template:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload nginx
+
+- name: enable and start web server
+  systemd:
+    name: nginx
+    enabled: yes
+    state: started
