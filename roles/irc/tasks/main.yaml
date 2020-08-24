@@ -1,0 +1,7 @@
+---
+
+- name: install unrealircd
+  pacman:
+    name: unrealircd
+    state: present
+  

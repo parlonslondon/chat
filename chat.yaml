@@ -1,0 +1,17 @@
+---
+
+# provisions everything required to be a theLounge server
+
+- name: chat
+  hosts: all
+  gather_facts: yes
+  roles:
+    - irc
+#    - thelounge
+  handlers:
+    - name: reload systemd
+      command: "systemctl daemon-reload"
+    - name: reload nginx
+      systemd:
+        name: nginx
+        state: reloaded
