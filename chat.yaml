@@ -7,7 +7,7 @@
   gather_facts: yes
   roles:
     - irc
-#    - thelounge
+    - thelounge
   handlers:
     - name: reload systemd
       command: "systemctl daemon-reload"
